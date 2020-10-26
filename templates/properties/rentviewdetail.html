@@ -1,0 +1,62 @@
+{% extends 'home/base.html' %}
+{% block title %}Rent Property Details{% endblock title %}
+{% block homeactive %} active {% endblock homeactive %}
+
+{% block body %}
+<div class="container my-4">
+<h3 class="my-4">Property Details</h3>
+    <div class="row">
+     <div class="col-md-4">
+            <div class="row">
+                <img src="/media/{{detail.mainimage}}" width="300px" height="300px" >
+            </div>
+            <div class="row">
+                
+                
+            </div>
+        </div>
+        
+        <div class="col-md-5 ">
+            <p><b class="mx-5 ">Address: </b>{{detail.address }} {{detail.address2 }}   <p>
+            <p><b class="mx-5 "> State : </b>{{detail.statename }}</p>
+            <p><b class="mx-5"> Country : </b>{{detail.country }}</p>
+            <p><b class="mx-5"> Pin Code : </b>{{detail.zipf }}</p>
+            <p><b class="mx-5"> Cunstruction Year : </b>{{detail.cunstructionyear }}</p>
+            <p><b class="mx-5"> Area : </b>{{detail.area }} Sqft</p>
+            <p><b class="mx-5"> Property Type : </b>{{detail.propertytype }}</p>
+            <p><b class="mx-5"> Rent : </b>{{detail.rentpermonth }} Rs.</p>
+        </div>
+        
+        <div class="col-md-3 ">
+        <p><b class="mx-5"> Furnished : </b>{{detail.furnshid}}</p>
+        <p><b class="mx-5"> Parking : </b>{{detail.furnshid}}</p>
+        <p><b class="mx-5"> Swimming Pool : </b>{{detail.furnshid}}</p>
+        <p><b class="mx-5"> Air-Conditioner : </b>{{detail.furnshid}}</p>
+        <p><b class="mx-5"> Max.Tanent  : </b>{{detail.maxallowedtanent}}</p>
+        <p><b class="mx-5"> Living Tanent : </b>{{detail.livingtanent}}</p>
+        </div>
+        <div class="col-md-12 ">
+        <p><b class="mx-0"> Description</b></p>
+        <p class="mx-5 text-justify" >{{detail.description }}</p>
+        </div>
+
+
+        <div class="col-md-12 mx-2 my-5">
+        <h3>Images Of Property</h3></br>
+        {% for image in images %}
+        <a href="/media/{{image}}" target="_blank"><img src="/media/{{image}}" width="300px" height="300px" ></a>
+        {% endfor %}
+        </div>
+
+        <div class="col-md-4   "  style="padding-bottom:60px">
+        <p><h4 class="mx-0"> Owner Details</h4></p>
+        <img src="/media/{{personaldetails.image}}" width="300px" height="300px" >  
+        </div>
+        <div class="col-md-8 my-5 mt-2  ">
+        <p><b class="mx-3">Name :</b>{{personaldetails.firstname}} {{personaldetails.middlename}} {{personaldetails.lastname}}<b class="mx-5"> Address :</b>{{personaldetails.address}} {{personaldetails.address2}} <b class="mx-4">City :</b>{{personaldetails.city}} </p>
+        <p><b class="mx-3">State :</b>{{personaldetails.statename}}<b class="mx-4">Country :</b>{{personaldetails.country}}<b class="mx-4">Pincode :</b>{{personaldetails.zipf}}<b class="mx-4">Gender :</b>{{personaldetails.gender}}  </p>
+        <p><b class="mx-3">Contact No  :</b>{{personaldetails.phone}}</p>   
+        </div>
+    </div>
+</div>
+{% endblock %}

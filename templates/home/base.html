@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Latest compiled and minified CSS -->
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- Optional theme -->
+    <!-- Bootstrap CSS -->
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+   
+    <title>{% block title %}{% endblock title %}</title>
+    
+</head>
+<style>
+{% block css %} {% endblock %}
+</style>
+<body style="overflow-x: hidden; margin-top:100px;">
+{% load static %}
+   
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: fixed;top: 0;width: 100%;z-index: 1;">
+        
+        <a class="navbar-brand" href="/" ">Real Estate<br> <span class="pl-2">Exposure</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse   mx-2 my-3" id="navbarSupportedContent" >
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item {% block homeactive %} {% endblock homeactive %} ">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                
+                <div class="collapse navbar-collapse mx-2" id="navbarSupportedContent" >
+                <div class="dropdown show">
+                <a class="dropdown-toggle" href="/" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" style="color:white;">
+                    Properties
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="propertieactive" >
+                    <a class="dropdown-item" href="/postforsale" >Post For sale</a>
+                    <a class="dropdown-item" href="/postforrent">Post For rent</a>
+                    {% comment %} <a class="dropdown-item" href="#">Something else here</a> {% endcomment %}
+                </div>
+                </div>
+                </div>
+
+
+                <div class="collapse navbar-collapse mx-3" id="navbarSupportedContent" >
+                <div class="dropdown show">
+                <a class="dropdown-toggle" href="/""  id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"style="color:white;" >
+                    For Other Profiles
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="propertieactive" >
+                    <a class="dropdown-item" href="/roommateprofile" >Roommate Profile Setup or post for roommate </a>
+                    <a class="dropdown-item" href="/serviceproviderprofile">Service Provider Profile Setup</a>
+                    <a class="dropdown-item" href="/addemployee">Add Your Employee</a>
+                </div>
+                </div>
+                </div>
+                
+                <li class="nav-item {% block aboutactive %} {% endblock aboutactive %}">
+                    <a class="nav-link" href="/about" style="color:white;">About</a>
+                </li>
+                <li class="nav-item {% block contactactive %} {% endblock contactactive %}">
+                    <a class="nav-link" href="/contact" style="color:white;">Contact</a>
+                </li>
+
+
+            </ul>
+
+            
+            <div class="ml-auto form-inline">
+            <!--
+                <form method="get" action="/search" class=" my-2  my-lg-0">
+                    <input class="form-control mx-1 " type="search" placeholder="Enter A City Name" aria-label="Search" name="query" id="query">
+                    <button class="btn btn-primary mx-1 mr-3 " type="submit">Search</button>
+                </form>-->
+                {% if user.is_authenticated %}
+                <ul class="navbar-nav mr-2">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Welcome {{request.user}}</a>
+                        
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" data-toggle="modal" data-target="#getprofileModal" href="">Profile Setup</a>
+                            <a class="dropdown-item" href="/aboutyou"> About You</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                            
+                        </div>
+                        
+                    </li>
+                    
+                </ul>
+                {% else %}
+                <!-- Button to trigger Login modal -->
+                <button type="button" class="btn btn-primary mx-4" data-toggle="modal" data-target="#loginModal">
+                Login
+                </button>
+                <!-- Button to trigger Signup modal -->
+                <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#signupModal">
+                    SignUp
+                </button>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+   
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} mb-0 alert-dismissible fade show" role="alert">
+        <strong>Message: </strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+
+    <!--SignUp Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signupModalTitle">SignUp TO Create New Account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit = "return validation();" action="/signup">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" onblur="checkEmail()" required>
+                            <span id="nerror" class="text-danger font-weight-bold"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass1">Password</label>
+                            <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Create your password" onblur="checkPassword()" required>
+                            <span id="paerror" class="text-danger font-weight-bold"> </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass2">Confirm Password</label>
+                            <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">SuginUp</button>
+                </form>
+            </div>
+            <!-- <div class="modal-footer">-->
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!--Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalTitle">Login Here</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/login">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="username">Email</label>
+                            <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Enter your Email address " required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass">password</label>
+                            <input type="password" class="form-control" id="loginpassword" name="loginpassword" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+                <!--<div class="modal-footer">-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!--getprofile Modal -->
+    <div class="modal fade" id="getprofileModal" tabindex="-1" role="dialog" aria-labelledby="getprofileModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="getprofileModalTitle">Enter your Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/getprofile" enctype="multipart/form-data" >
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <!--Grid row for profile Photo upload-->
+                            <div class="form-group">
+                                    <img id="prfilepic" name="prfilepic" src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg" style="width: 150px;
+border-radius: 50%;" class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <div class="btn btn-mdb-color btn-rounded float-left">
+                                        <input type="file" name="prfilepicfile" id="prfilepicfile" >
+                                        <!--Grid column-->
+                                    </div>
+                                    <!--Grid row-->
+                                </div>
+                                <div class="form-group">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter your first name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mname">Middle Name</label>
+                                    <input type="text" class="form-control" id="mname" name="mname" placeholder="Enter your middle name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter your last name" required>
+                                </div>
+                                <div class="form-group">
+                                    <!-- Date of Birth input -->
+                                    <label class="control-label" for="dob">Date of Birth</label>
+                                    <input class="form-control" id="dob" name="dob" placeholder="MM/DD/YYY" type="date" required>
+                                </div>
+                                <!-- Default inline 1-->
+                                <div class="form-group">
+                                    <label for="gender">Gender</label>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="male" name="gender" value="male" checked>
+                                        <label class="custom-control-label" for="male">Male</label>
+                                    </div>
+                                    <!-- Default inline 2-->
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="female" value="female"  name="gender">
+                                        <label class="custom-control-label" for="female">Female</label>
+                                    </div>
+                                    <!-- Default inline 3-->
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="others" value="others"  name="gender">
+                                        <label class="custom-control-label" for="others">Others</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Mobile No</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="897-581-6169"  required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main street" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address2">Address 2</label>
+                                    <input type="text" class="form-control" id="address2" name="address2" placeholder="Apartment, studio, or floor" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">country</label>
+                                    <input type="text" class="form-control" id="country" name="country" placeholder="Country" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="statename">Address 2</label>
+                                    <input type="text" class="form-control" id="statename" name="statename" placeholder="State" required>
+                                </div>
+                                <!--
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="country">Country</label>
+                                        <select id="country" name="country" class="form-control">
+                                            <option selected>Choose</option>
+                                            <option>...</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="statename">State</label>
+                                        <select id="statename" id="statename" class="form-control">
+                                            <option selected>Choose</option>
+                                            <option>...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                -->
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="city">City</label>x
+                                        <input type="text" class="form-control" placeholder="City " id="city" name="city" required>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="zipf">Zip</label>
+                                        <input type="text" class="form-control" id="zipf" placeholder="Pincode " name="zipf" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <!-- <div class="modal-footer">-->
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+    
+
+    
+    {% block body %}{% endblock body %}
+
+<!-- Footer -->
+
+
+  <!-- Footer Elements -->
+  <div class="container-fluid col-12 " style="color:lightgray; position: fixed;
+  left: 0;
+  bottom: 0;
+  right:0;
+  margin-top:80px;
+  width: 100%;
+  background-color: lightgray;
+  color: white;
+  text-align: center; ">
+
+    <!-- Call to action -->
+    <ul class="text-center" style="color:white; left: 0;right:0;">
+      <li class="list-inline-item">
+        <h5 class="mb-1" style="color:black;">Register for free</h5>
+      </li>
+      <li class="list-inline-item">
+        <a href="" class="btn btn-outline-white btn-rounded"style="color:black; border: 1px solid black" data-toggle="modal" data-target="#signupModal">Sign up!</a>
+      </li>
+    </ul>
+    <!-- Call to action -->
+    <!-- Copyright -->
+  <div class="footer-copyright text-center"  style="color:black;">© 2020 Copyright:
+    <a href="#"> RealEstateExposure.com</a>
+  </div>
+
+  </div>
+  <!-- Footer Elements -->
+
+  
+  <!-- Copyright -->
+
+
+<!-- Footer -->
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src='{% static "js/validation.js" %}'></script>
+</body>
+<script>
+{% block javaScript %} {% endblock javaScript %}
+
+</script>
+</html>

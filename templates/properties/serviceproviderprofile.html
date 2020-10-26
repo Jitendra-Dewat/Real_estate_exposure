@@ -1,0 +1,103 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Make Profile For Service Provider{% endblock title %}
+{% block homeactive %} active {% endblock homeactive %} 
+
+{% block body %}
+<div class="container " style="padding-bottom:80px">
+    <div class="row justify-content-center  my-4 " >
+            <form method="post" action="/serviceproviderprofilehandle" enctype="multipart/form-data">
+            {% csrf_token %} 
+                                <h3><label for="regno">Make Profile for your Company</label></h3>
+
+                                <div class="form-group">
+                                    <label for="regno">Registration No</label>
+                                    <input type="text" class="form-control" id="regno" name="regno" placeholder="Enter 6 Digit Reg. No" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Company Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Company Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Mobile No</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="895-45-678"  required>
+                                </div>
+                                <div class="form-group">
+                                    <!-- Date of Birth input -->
+                                    <label class="control-label" for="estyear">Esteblished Year</label>
+                                    <input class="form-control" id="estyear" name="estyear" placeholder="MM/DD/YYY" type="date" required>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="address">Address of the Office</label>
+                                    <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address2">Address 2</label>
+                                    <input type="text" class="form-control" id="address2" name="address2" placeholder="Apartment, studio, or floor" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">country</label>
+                                    <input type="text" class="form-control" id="country" name="country" placeholder="Country" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="statename">State Name</label>
+                                    <input type="text" class="form-control" id="statename" name="statename" placeholder="State Name" required>
+                                </div>
+                            
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="city">City</label>
+                                        <input type="text" class="form-control" placeholder="City" id="city" name="city" required>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="zipf">Zip</label>
+                                        <input type="text" class="form-control" placeholder="Pincode" id="zipf" name="zipf" required>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="bio">Give short Description about your Company. </label>
+                                    <small>(Like What Services Company Provides.)</small>
+                                    <textarea class="form-control" id="bio" placeholder="Give short Description about your Company." name="bio" rows="3"></textarea>
+                                </div>
+
+
+                                <button type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
+        
+    </div>
+</div>
+{% endblock body %}
+
+
+<!--{% block javaScript %}
+<script>
+$(document).ready(function(){
+    var maxField = 10; //Input fields increment limitation
+    var addButton = $('.add_button'); //Add button selector
+    var wrapper = $('.field_wrapper'); //Input field wrapper
+    var fieldHTML = '<div><input class="my-2" type="file" name="field_name[]" value=""/><a style="text-decoration:none;" href="javascript:void(0);" class="remove_button">Remove Image Feild</a></div>'; //New input field html 
+    var x = 1; //Initial field counter is 1
+    
+    //Once add button is clicked
+    $(addButton).click(function(){
+        //Check maximum number of input fields
+        if(x < maxField){ 
+            x++; //Increment field counter
+            $(wrapper).append(fieldHTML); //Add field html
+        }
+    });
+    
+    //Once remove button is clicked
+    $(wrapper).on('click', '.remove_button', function(e){
+        e.preventDefault();
+        $(this).parent('div').remove(); //Remove field html
+        x--; //Decrement field counter
+    });
+});
+</script> -->
+{% endblock javaScript %}

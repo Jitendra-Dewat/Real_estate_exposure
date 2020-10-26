@@ -1,0 +1,58 @@
+{% extends 'home/base.html' %}
+{% block title %}Flatemate Details{% endblock title %}
+{% block homeactive %} active {% endblock homeactive %}
+
+{% block body %}
+<div class="container my-4">
+<h3 class="my-4">Person Details</h3>
+    <div class="row">
+     <div class="col-md-4">
+            <div class="row">
+                <img src="/media/{{flatmate.prfilepicfile}}" width="300px" height="300px" >
+            </div>
+    </div>
+        
+        <div class="col-md-5 ">
+            <p><b class="mx-5 ">Name :</b>{{flatmate.firstname }} {{flatmate.middlename }} {{flatmate.lastname }}   <p>
+            <p><b class="mx-5 ">Address :</b>{{flatmate.address }} {{flatmate.address2 }}   <p>
+            <p><b class="mx-5 "> City : </b>{{flatmate.city }}</p>
+            <p><b class="mx-5">State Name : </b>{{flatmate.statename }}</p>
+            <p><b class="mx-5"> Country : </b>{{flatmate.country }}</p>
+            <p><b class="mx-5"> Pincode : </b>{{flatmate.zipf }}</p>
+            <p><b class="mx-5"> Area : </b>{{flatmate.area }} Sqft</p>
+            <p><b class="mx-5"> DOB : </b>{{flatmate.dob }}</p>
+            <p><b class="mx-5"> Max Tanent : </b>{{flatmate.maxtanent }}</p>
+            
+        </div>
+        
+        <div class="col-md-3 ">
+        <p><b class="mx-5"> Phone : </b>{{flatmate.phone }}</p>
+        <p><b class="mx-5"> Smoking : </b>{{flatmate.smoking }}</p>
+        <p><b class="mx-5"> Alcohol: </b>{{flatmate.alchohal}}</p>
+        <p><b class="mx-5"> Nonvegitarian : </b>{{flatmate.nonvegitarian}}</p>
+        <p><b class="mx-5"> Earlybird : </b>{{flatmate.earlybird}}</p>
+        <p><b class="mx-5"> Rent : </b>{{flatmate.rent}} </p>
+        <p><b class="mx-5"> PropType : </b>{{flatmate.propertytype}}</p>
+        <p><b class="mx-5"> Livin Tanent : </b>{{flatmate.livingtanent}}</p>
+        </div>
+        <div class="col-md-12 my-5 ">
+        <p><h4 class="mx-0 text-justify"> Bio </h4></p>
+        <p class="mx-5" >{{flatmate.bio }}</p>
+        </div>
+        <div class="col-md-12 my-5 ">
+        <p><h4 class="mx-0"> What he is Loocking for </h4></p>
+        <p class="mx-5 text-justify" >{{flatmate.expecteddescriptionofguy }}</p>
+        </div>
+
+
+        <div class="col-md-12 mx-2 my-4" style="padding-bottom:60px">
+        <h3>Images Of Property</h3></br>
+        <img src="/media/{{flatmate.mainimage}}" width="300px" height="300px" > 
+        {% for image in roommateprofilepropimages %}
+        <img src="/media/{{image.image}}" width="300px" height="300px" >
+        {% endfor %}
+        </div>
+         
+    </div>
+</div>
+{% endblock %}

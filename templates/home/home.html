@@ -1,0 +1,134 @@
+{% extends 'home/base.html' %}
+{% block title %}Home{% endblock title %}
+{% block homeactive %} active {% endblock homeactive %}
+
+{% block css %}
+          .col-md-3
+          {
+          display: inline-block;
+         
+          }
+
+          .card-body {
+            width: 100%;
+            
+            
+          
+          }
+          .col-md-3 img{
+            margin-left:-15px;
+          width: 285px;
+          height: 200px;
+          }
+          .card-text{
+            margin-left:-25px;
+            width: 285px;
+          }
+
+          .btn-primary{
+            margin-right:5px;
+          }
+           body .no-padding{
+           padding-left: 0,
+           padding-right: 0;
+           }
+ {% endblock %}
+ 
+
+
+{% block body %}
+{% load static %}
+
+{% if sellen != 0 %}
+<div class="container-fluid my-5 mx-2 " style="padding-bottom:60px;" >
+    <h3 class="col-md-3" style="margin-left:50px">Selling Properties</h3>
+    <ul id="horizontal-list">
+    {% for home in allsellinghomes %}
+    <li style="display:inline;" class="my-2">
+    <div class="card col-md-3 my-3 mx-4" style="width: 18rem;" >
+      <img src="/media/{{home.mainimage}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <small><p class="card-text"><b>Valuation : {{home.price}} Rs.  {{ home.propertytype}}</b></p></small>
+              <small><p class="card-text"><b>Area : {{home.area}} Sqft</b>,  Address: {{home.address}} {{home.address2}}<b> {{home.city}}</b> {{home.statename}}</p></small>
+              <small><p class="card-text"><b>Pincode : {{home.zipf}} </b></p></small>
+              <a href="properties/saledetail/{{home.propertyid}}" id="home.propertyid" class="btn btn-primary mx-1 my-2">Get Details</a>
+              <a href="properties/payment/{{home.propertyid}}" class="btn btn-primary mx-1 my-2">Buy Now</a>
+      </div>
+    </div>
+    </li>
+    {% endfor %}
+    <ul>
+     <a href="/allsellingprop" class="btn btn-secondary float-right">Click For More</a>
+</div>
+{% endif %}
+
+{% if renlen != 0 %}
+<div class="container-fluid my-5 mx-2 " style="padding-bottom:60px">
+<h3 class="col-md-3" style="margin-left:50px">Properties for rent</h3>
+<ul id="horizontal-list">
+    {% for homes in allrentinghomes %}
+    <li style="display:inline;" class="my-2">
+    <div class="card col-md-3 my-3 mx-4" style="width: 18rem;" >
+      <img src="/media/{{homes.mainimage}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <small><p class="card-text"><b>Rent permonth : {{homes.rentpermonth}} Rs.  {{ homes.propertytype}}</b></p></small>
+              <small><p class="card-text"><b>Area : {{homes.area}} Sqft</b>,  Address: {{homes.address}} {{homes.address2}} <b> {{homes.city}}</b> {{homes.statename}}</p></small>
+              <small><p class="card-text"><b>Pincode : {{homes.zipf}}  MaxTanent: </b>{{homes.maxallowedtanent}} <b> Living: </b>{{homes.livingtanent}}  </p></small>
+              <a href="properties/rentdetail/{{homes.propertyid}}" id="homes.propertyid" class="btn btn-primary my-2">Get Details</a>
+              <!--<a href="properties/payment/{{homes.propertyid}}" class="btn btn-primary">Buy Now</a>-->
+      </div>
+    </div>
+    </li>
+    {% endfor %}
+    <ul>
+     <a href="/allrentingprop" class="btn btn-secondary float-right">Click For More</a>
+</div>
+{% endif %}
+
+{% if flatlen != 0 %}
+<div class="container-fluid my-5 mx-2 " style="padding-bottom:60px">
+<h3 class="col-md-3" style="margin-left:50px">Looking For Flatmates</h3>
+<ul id="horizontal-list">
+    {% for flatmate in allflatmates %}
+    <li style="display:inline;" class="my-2">
+    <div class="card col-md-3 my-3 mx-4" style="width: 18rem;" >
+      <img src="/media/{{flatmate.prfilepicfile}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <small><p class="card-text"><b>{{flatmate.firstname}} {{ flatmate.lastname}}, </b>{{flatmate.gender}} Living In <b>{{flatmate.area}} Sqft </b>Apar. </p></small>
+              <small><p class="card-text"><b> Address: </b>{{flatmate.address}} {{flatmate.address2}} <b> {{flatmate.city}}</b> {{flatmate.statename}}<b> Pincode : {{flatmate.zipf}} MaxTanent :  </b>{{flatmate.maxtanent}}</p></small>
+              <small><p class="card-text"><b>Living : </b>{{flatmate.livingtanent}}</p></small>
+              <a href="properties/roommatedetail/{{flatmate.roommateprofileid}}" id="employee.propertyid" class="btn btn-primary my-2 ">Get Details</a>
+              <!--<a href="properties/payment/{{home.propertyid}}" class="btn btn-primary">Buy Now</a>-->
+      </div>
+    </div>
+    </li>
+    {% endfor %}
+    <ul>
+     <a href="/roommates" class="btn btn-secondary float-right">Click For More</a>
+</div>
+{% endif %}
+
+{% if emplen != 0 %}
+<div class="container-fluid my-5 mx-2 " style="padding-bottom:60px">
+<h3 class="col-md-3" style="margin-left:50px">Mades For Hiring</h3>
+<ul id="horizontal-list">
+    {% for employee in allemployees %}
+    <li style="display:inline;" class="my-2">
+    <div class="card col-md-3 my-3 mx-4" style="width: 18rem;" >
+      <img src="/media/{{employee.prfilepic}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <small><p class="card-text"><b>{{employee.firstname}} {{ employee.lastname}},</b> {{employee.gender}} is Works as <b>{{employee.worktype}} </b></p></small>
+              <small><p class="card-text">Looking For Work <b></b>,  Address: {{employee.address}} {{employee.address2}} <b> {{employee.city}}</b> {{employee.statename}}</p></small>
+              <small><p class="card-text"><b>Pincode : {{employee.zipf}}, Contact :  </b> {{employee.phone}}</p></small>
+              <a href="properties/employeedetail/{{employee.employeeid}}" id="homes.propertyid" class="btn btn-primary">Get Details</a>
+              <!--<a href="properties/payment/{{home.propertyid}}" class="btn btn-primary">Buy Now</a>-->
+      </div>
+    </div>
+    </li>
+    {% endfor %}
+    <ul>
+     <a href="/allemployee" class="btn btn-secondary float-right">Click For More</a>
+</div>
+{% endif %}
+
+ {% endblock %}

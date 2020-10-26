@@ -1,0 +1,64 @@
+{% extends 'home/base.html' %}
+{% block title %}All Rentable Homes{% endblock title %}
+{% block homeactive %} active {% endblock homeactive %}
+
+{% block css %}
+          .col-md-3
+          {
+          display: inline-block;
+         
+          }
+
+          .card-body {
+            width: 100%;
+          
+          }
+          .col-md-3 img{
+
+          margin-left:-15px;
+          width: 285px;
+          height: 200px;
+          }
+
+          .card-text{
+            margin-left:-25px;
+            width: 285px;
+          }
+
+          .btn-primary{
+            margin-right:5px;
+          }
+
+           body .no-padding{
+           padding-left: 0,
+           padding-right: 0;
+           }
+ {% endblock %}
+ 
+
+
+{% block body %}
+{% load static %}
+<div class="container-fluid my-5 mx-2 " style="padding-bottom:80px">
+
+<h3 class="col-md-3" style="margin-left:50px">Properties for rent</h3>
+<ul id="horizontal-list">
+    {% for homes in allrentinghomes %}
+    <li style="display:inline;" class="my-2">
+    <div class="card col-md-3 my-3 mx-4" style="width: 18rem;" >
+      <img src="/media/{{homes.mainimage}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <small><p class="card-text"><b>Rent permonth : {{homes.rentpermonth}} Rs.  {{ homes.propertytype}}</b></p></small>
+              <small><p class="card-text"><b>Area : {{homes.area}} Sqft</b>,  Address: {{homes.address}} {{homes.address2}} <b> {{homes.city}}</b> {{homes.statename}}</p></small>
+              <small><p class="card-text"><b>Pincode : {{homes.zipf}}  MaxTanent: </b>{{homes.maxallowedtanent}} <b> Living: </b>{{homes.livingtanent}}  </p></small>
+              <a href="properties/rentdetail/{{homes.propertyid}}" id="homes.propertyid" class="btn btn-primary my-2">Get Details</a>
+              <!--<a href="properties/payment/{{homes.propertyid}}" class="btn btn-primary">Buy Now</a>-->
+      </div>
+    </div>
+    </li>
+    {% endfor %}
+    <ul>
+     
+</div>
+
+ {% endblock %}

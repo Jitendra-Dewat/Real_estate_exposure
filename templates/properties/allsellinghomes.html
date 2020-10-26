@@ -1,0 +1,63 @@
+{% extends 'home/base.html' %}
+{% block title %}All Selling Homes{% endblock title %}
+{% block homeactive %} active {% endblock homeactive %}
+
+{% block css %}
+          .col-md-3
+          {
+          display: inline-block;
+         
+          }
+
+          .card-body {
+            width: 100%;
+          
+          }
+          .col-md-3 img{
+
+          margin-left:-15px;
+          width: 285px;
+          height: 200px;
+          }
+
+          .card-text{
+            margin-left:-25px;
+            width: 285px;
+          }
+
+          .btn-primary{
+            margin-right:5px;
+          }
+
+           body .no-padding{
+           padding-left: 0,
+           padding-right: 0;
+           }
+ {% endblock %}
+ 
+
+
+{% block body %}
+{% load static %}
+<div class="container-fluid my-5 mx-2 " style="padding-bottom:80px">
+<h3 class="col-md-3" style="margin-left:50px">Selling Properties</h3>
+    <ul id="horizontal-list">
+    {% for home in allsellinghomes %}
+    <li style="display:inline;" class="my-2">
+    <div class="card col-md-3 my-3 mx-4" style="width: 18rem;" >
+      <img src="/media/{{home.mainimage}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <small><p class="card-text"><b>Valuation : {{home.price}} Rs.  {{ home.propertytype}}</b></p></small>
+              <small><p class="card-text"><b>Area : {{home.area}} Sqft</b>,  Address: {{home.address}} {{home.address2}}<b> {{home.city}}</b> {{home.statename}}</p></small>
+              <small><p class="card-text"><b>Pincode : {{home.zipf}} </b></p></small>
+              <a href="properties/saledetail/{{home.propertyid}}" id="home.propertyid" class="btn btn-primary mx-1 my-2">Get Details</a>
+              <a href="properties/payment/{{home.propertyid}}" class="btn btn-primary mx-1 my-2">Buy Now</a>
+      </div>
+    </div>
+    </li>
+    {% endfor %}
+    <ul>
+     
+</div>
+
+ {% endblock %}

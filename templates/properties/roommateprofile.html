@@ -1,0 +1,273 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Make Profile For Room-mate{% endblock title %}
+{% block homeactive %} active {% endblock homeactive %} 
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center mx-2 my-4" style="padding-bottom:60px">
+            <form method="post" action="/roommateprofilehandle" enctype="multipart/form-data">
+            {% csrf_token %} 
+                                <div class="form-group">
+                                    <label for="personaldetails"><h3>  Enter Your Personal  Details For Roommate Profile </h3></label>
+                                </div>
+
+                                <div class="form-group">
+                                    <img id="prfilepic" name="prfilepic" src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg" style="width: 150px;
+border-radius: 50%;" class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <div class="btn btn-mdb-color btn-rounded float-left">
+                                        <input type="file" name="prfilepicfile" id="prfilepicfile" >
+                                        <!--Grid column-->
+                                    </div>
+                                    <!--Grid row-->
+                                </div>
+                                <div class="form-group">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter your first name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mname">Middle Name</label>
+                                    <input type="text" class="form-control" id="mname" name="mname" placeholder="Enter your middle name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter your last name" required>
+                                </div>
+                                <div class="form-group">
+                                    <!-- Date of Birth input -->
+                                    <label class="control-label" for="dob">Date of Birth</label>
+                                    <input class="form-control" id="dob" name="dob" placeholder="MM/DD/YYY" type="date" required>
+                                </div>
+                                <!-- Default inline 1-->
+                                <div class="form-group">
+                                    <label for="gender">Gender</label>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="male" name="gender" value="male" checked>
+                                        <label class="custom-control-label" for="male">Male</label>
+                                    </div>
+                                    <!-- Default inline 2-->
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="female" value="female"  name="gender">
+                                        <label class="custom-control-label" for="female">Female</label>
+                                    </div>
+                                    <!-- Default inline 3-->
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="others" value="others"  name="gender">
+                                        <label class="custom-control-label" for="others">Others</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Mobile No</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="897-581-6169"  required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="address">Address of the place that you want to share</label>
+                                    <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address2">Address 2</label>
+                                    <input type="text" class="form-control" id="address2" name="address2" placeholder="Apartment, studio, or floor" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">country</label>
+                                    <input type="text" class="form-control" id="country" name="country" placeholder="Country" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="statename">State Name</label>
+                                    <input type="text" class="form-control" id="statename" name="statename" placeholder="State Name" required>
+                                </div>
+                            
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="city">City</label>
+                                        <input type="text" class="form-control" placeholder="City" id="city" name="city" required>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="zipf">Zip</label>
+                                        <input type="text" class="form-control" id="zipf" placeholder="Pincode" name="zipf" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="habits"><h5>Details about your Habits</h5></label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="smoking">Smoking</label> 
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="smoking1" name="smoking" value="Yes" >
+                                        <label class="custom-control-label" for="smoking1">Yes</label>
+                                    </div>
+                                    <!-- Default inline 2-->
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="smoking2" value="No"  name="smoking" checked>
+                                        <label class="custom-control-label" for="smoking2">No</label>
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label for="alchohal">Alchohal</label>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="alchohal1" name="alchohal" value="Yes" >
+                                        <label class="custom-control-label" for="alchohal1">Yes</label>
+                                    </div>
+                                    <!-- Default inline 2-->
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="alchohal2" value="No"  name="alchohal" checked>
+                                        <label class="custom-control-label" for="alchohal2">No</label>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nonvegitarian">Non Vegitarian</label>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="nonvegitarian1" name="nonvegitarian" value="Yes" >
+                                        <label class="custom-control-label" for="nonvegitarian1">Yes</label>
+                                    </div>
+                                    <!-- Default inline 2-->
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="nonvegitarian2" value="No"  name="nonvegitarian" checked>
+                                        <label class="custom-control-label" for="nonvegitarian2">No</label>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="earlybird">Early Bird</label>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="earlybird1" name="earlybird" value="Yes" >
+                                        <label class="custom-control-label" for="earlybird1">Yes</label>
+                                    </div>
+                                    <!-- Default inline 2-->
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="earlybird2" value="No"  name="earlybird" checked>
+                                        <label class="custom-control-label" for="earlybird2">No</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="bio">Give short Description about your self. </label>
+                                    <small>(Like Where do you work. And what work you do.)</small>
+                                    <textarea class="form-control" id="bio" placeholder="Give short Description about your self that describes you all." name="bio" rows="3"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="rent">Expected Rent Per Month</label>
+                                    <input type="text" class="form-control" id="rent" name="rent" placeholder="Enter Rent" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="area">Area</label>
+                                    <small>(In sqr feet)</small>
+                                    <input type="text" class="form-control" id="area" name="area" placeholder="Enter Area" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="propertytype">Property Type</br></label>
+                                    <div class="form-group">
+                                    <h5>Note :</h5>
+                                    <small>In others there will be any type of property other than these five (Like Blank land, Villas etc... )</small>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="onebhk" name="propertytype" value="onebhk" checked>
+                                        <label class="custom-control-label" for="onebhk">1 BHK</label>
+                                    </div>
+                                    <!-- Default inline 2-->
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="twobhk" value="twobhk"  name="propertytype">
+                                        <label class="custom-control-label" for="twobhk">2 BHK</label>
+                                    </div>
+                                    <!-- Default inline 3-->
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="threebhk" value="threebhk"  name="propertytype">
+                                        <label class="custom-control-label" for="threebhk">3 BHK</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="fourbhk" value="fourbhk"  name="propertytype">
+                                        <label class="custom-control-label" for="fourbhk">4 BHK</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="fivebhk" value="fivebhk"  name="propertytype">
+                                        <label class="custom-control-label" for="fivebhk">5 BHK</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="others1" value="others1"  name="propertytype">
+                                        <label class="custom-control-label" for="others1">Others</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">  
+                                <label for="mainimage">Add Front Face Image of Property </label>  
+                                </div>    
+                                 
+                                <div class="form-group field_wrapper mt-1"> 
+                                <input type="file" name="mainimage" id="mainimage" value="" class="my-2"  >
+                                <!--<<input type="text" name="field_name[]" value=""/>
+                                <a style="text-decoration:none;" href="javascript:void(0);" class="add_button" title="Add field">Add Image Feild</a>-->
+                                </div>
+                                
+                                <div class="form-group">  
+                                <label for="addimage">add image files according to your requirement </label>  
+                                </div>    
+                                 
+                                <div class="form-group field_wrapper mt-1"> 
+                                <input type="file" name="images" id="propertyimages" value="" class="my-2"  multiple>
+                                <!--<<input type="text" name="field_name[]" value=""/>
+                                <a style="text-decoration:none;" href="javascript:void(0);" class="add_button" title="Add field">Add Image Feild</a>-->
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="maxtanent">Max Tanent Allowed</label>
+                                    <input type="text" class="form-control" id="maxtanent" name="maxtanent" placeholder="Enter max tanent allowed" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="livingtanent">No of People Already Living in</label>
+                            <input type="text" class="form-control" id="livingtanent" name="livingtanent" placeholder="Enter No of tanents living curruntly" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="expecteddescriptionofguy">Give Description About expected Person</label>
+                                    <textarea class="form-control" id="expecteddescriptionofguy" placeholder="Give short Description about ecpected guy." name="expecteddescriptionofguy" rows="3"></textarea>
+                                </div>
+                                
+
+                                <button type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
+        
+    </div>
+</div>
+{% endblock body %}
+
+
+<!--{% block javaScript %}
+<script>
+$(document).ready(function(){
+    var maxField = 10; //Input fields increment limitation
+    var addButton = $('.add_button'); //Add button selector
+    var wrapper = $('.field_wrapper'); //Input field wrapper
+    var fieldHTML = '<div><input class="my-2" type="file" name="field_name[]" value=""/><a style="text-decoration:none;" href="javascript:void(0);" class="remove_button">Remove Image Feild</a></div>'; //New input field html 
+    var x = 1; //Initial field counter is 1
+    
+    //Once add button is clicked
+    $(addButton).click(function(){
+        //Check maximum number of input fields
+        if(x < maxField){ 
+            x++; //Increment field counter
+            $(wrapper).append(fieldHTML); //Add field html
+        }
+    });
+    
+    //Once remove button is clicked
+    $(wrapper).on('click', '.remove_button', function(e){
+        e.preventDefault();
+        $(this).parent('div').remove(); //Remove field html
+        x--; //Decrement field counter
+    });
+});
+</script> -->
+{% endblock javaScript %}

@@ -1,0 +1,147 @@
+{% extends 'home/base.html' %}
+{% block title %}About You{% endblock title %}
+{% block homeactive %} active {% endblock homeactive %}
+
+{% block css %}
+          .col-md-3
+          {
+          display: inline-block;
+         
+          }
+
+          .card-body {
+            width: 100%;
+          
+          }
+          .col-md-3 img{
+
+          margin-left:-15px;
+          width: 285px;
+          height: 200px;
+          }
+
+          .card-text{
+            margin-left:-25px;
+            width: 285px;
+          }
+
+          .btn-primary{
+            margin-right:5px;
+          }
+
+           body .no-padding{
+           padding-left: 0,
+           padding-right: 0;
+           }
+ {% endblock %}
+ 
+
+
+{% block body %}
+{% load static %}
+<div class="container-fluid col-md-12  my-5 mx-2 " style="padding-bottom:60px">
+    {% if prolen != 0 %}
+        <div class="col-md-12  float-left " style="margin-left:50px">
+        <p><h4 class="mx-0" style="margin-left:100px"> Profile Details</h4></p>
+        <div class="col-md-4  float-left ">
+        
+        <img src="/media/{{profiledetail.image}}" class="my-4" width="300px" height="300px" >  
+        </div>
+        <div class="col-md-8  mt-2 float-right">
+        <p><b class="mx-3">Name :</b>{{profiledetail.firstname}} {{profiledetail.middlename}} {{profiledetail.lastname}}<b class="mx-5"> Address :</b>{{profiledetail.address}} {{profiledetail.address2}} <b class="mx-4">City :</b>{{profiledetail.city}} </p>
+        <p><b class="mx-3">State :</b>{{profiledetail.statename}}<b class="mx-4">Country :</b>{{profiledetail.country}}<b class="mx-4">Pincode :</b>{{profiledetail.zipf}}<b class="mx-4">Gender :</b>{{profiledetail.gender}}  </p>
+        <p><b class="mx-3">Contact No  :</b>{{profiledetail.phone}}</p>   
+        </div>
+        </div>
+    {% endif %}
+
+{% if sellen != 0 %}
+<div class="col-md-12  float-left " style="padding-bottom:60px">
+<h3 class="col-md-3" style="margin-left:50px">You Posted For Sell</h3>
+    <ul id="horizontal-list">
+    {% for home in sellingpsot %}
+    <li style="display:inline;" class="my-2">
+    <div class="card col-md-3 my-3 mx-4" style="width: 18rem;" >
+      <img src="/media/{{home.mainimage}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <small><p class="card-text"><b>Valuation : {{home.price}} Rs.  {{ home.propertytype}}</b></p></small>
+              <small><p class="card-text"><b>Area : {{home.area}} Sqft</b>,  Address: {{home.address}} {{home.address2}}<b> {{home.city}}</b> {{home.statename}}</p></small>
+              <small><p class="card-text"><b>Pincode : {{home.zipf}} </b></p></small>
+              <a href="properties/saledetail/{{home.propertyid}}" id="home.propertyid" class="btn btn-primary ">Details</a>
+              <a href="properties/saledelete/{{home.propertyid}}" id="home.propertyid" class="btn btn-primary ">delete post</a>
+              
+      </div>
+    </div>
+    </li>
+    {% endfor %}
+    <ul>
+</div>
+{% endif %}
+
+{% if renlen != 0 %}
+<div class="col-md-12  float-left " style="padding-bottom:60px">
+<h3 class="col-md-3" style="margin-left:50px">Properties Posted for rent</h3>
+<ul id="horizontal-list">
+    {% for homes in rentpost %}
+    <li style="display:inline;" class="my-2">
+    <div class="card col-md-3 my-3 mx-4" style="width: 18rem;" >
+      <img src="/media/{{homes.mainimage}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <small><p class="card-text"><b>Rent permonth : {{homes.rentpermonth}} Rs.  {{ homes.propertytype}}</b></p></small>
+              <small><p class="card-text"><b>Area : {{homes.area}} Sqft</b>,  Address: {{homes.address}} {{homes.address2}} <b> {{homes.city}}</b> {{homes.statename}}</p></small>
+              <small><p class="card-text"><b>Pincode : {{homes.zipf}}  MaxTanent: </b>{{homes.maxallowedtanent}} <b> Living: </b>{{homes.livingtanent}}  </p></small>
+              <a href="properties/rentdetail/{{homes.propertyid}}" id="homes.propertyid" class="btn btn-primary my-2">Get Details</a>
+              <a href="properties/rentdelete/{{homes.propertyid}}" id="home.propertyid" class="btn btn-primary ">delete post</a>
+      </div>
+    </div>
+    </li>
+    {% endfor %}
+    <ul>
+</div>
+{% endif %}
+
+
+{% if flatelen != 0 %}
+<div class="col-md-12  float-left " style="padding-bottom:60px">
+<h3 class="col-md-3" style="margin-left:50px">Looking For Flatmates</h3>
+<ul id="horizontal-list">
+    
+    <li style="display:inline;" class="my-2">
+    <div class="card col-md-3 my-3 mx-4" style="width: 18rem;" >
+      <img src="/media/{{flatemateprofile.prfilepicfile}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <small><p class="card-text"><b>{{flatemateprofile.firstname}} {{ flatemateprofile.lastname}}, </b>{{flatemateprofile.gender}} Living In <b>{{flatemateprofile.area}} Sqft </b>Apar. </p></small>
+              <small><p class="card-text"><b> Address: </b>{{flatemateprofile.address}} {{flatemateprofile.address2}} <b> {{flatemateprofile.city}}</b> {{flatemateprofile.statename}}<b> Pincode : {{flatemateprofile.zipf}} MaxTanent :  </b>{{flatemateprofile.maxtanent}}</p></small>
+              <small><p class="card-text"><b>Living : </b>{{flatemateprofile.livingtanent}}</p></small>
+              <a href="properties/roommatedetail/{{flatemateprofile.roommateprofileid}}" id="flatemateprofile.propertyid" class="btn btn-primary my-2 ">Get Details</a>
+              <!--<a href="properties/payment/{{home.propertyid}}" class="btn btn-primary">Buy Now</a>-->
+      </div>
+    </div>
+    </li>
+    
+    <ul>
+    </div>
+    {% endif %}
+
+
+
+{% if serlen != 0 %}
+<div class="col-md-12  float-left  my-5" style="padding-bottom:60px">
+<div class="col-md-12  float-left " style="margin-left:50px">
+        <p><h4 class="mx-0" style="margin-left:100px"> Service Provider Profile Details</h4></p>
+        <div class="col-md-12  mt-2 float-left">
+        <p><b class="mx-3">Name :</b>{{serviceproviderprofile.name}}  </p>
+        <p><b class="mx-3">Reg. No :</b>{{serviceproviderprofile.regno}} <b class="mx-5"> Address :</b>{{serviceproviderprofile.address}} {{serviceproviderprofile.address2}} <b class="mx-4">City :</b>{{serviceproviderprofile.city}} <b class="mx-4">Country :</b>{{profiledetail.country}}<b class="mx-4">Pincode :</b>{{profiledetail.zipf}}<b class="mx-4">Gender :</b>{{profiledetail.gender}}  </p>
+        <p><b class="mx-3">Contact No  :</b>{{serviceproviderprofile.phone}}</p>   
+        <p col-md-8><b class="mx-3 text-justify">Bio  :</b></p> 
+        <p col-md-12 class="text-justify">{{serviceproviderprofile.bio}}</p>
+        </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+
+</div>
+
+ {% endblock %}

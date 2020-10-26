@@ -1,0 +1,62 @@
+{% extends 'home/base.html' %}
+{% block title %}Home{% endblock title %}
+{% block homeactive %} active {% endblock homeactive %}
+
+{% block css %}
+          .col-md-3
+          {
+          display: inline-block;
+         
+          }
+
+          .card-body {
+            width: 100%;
+          
+          }
+          .col-md-3 img{
+            margin-left:-15px;
+          width: 285px;
+          height: 200px;
+          }
+          .card-text{
+            margin-left:-25px;
+            width: 285px;
+          }
+
+          .btn-primary{
+            margin-right:5px;
+          }
+
+           body .no-padding{
+           padding-left: 0,
+           padding-right: 0;
+           }
+ {% endblock %}
+ 
+
+
+{% block body %}
+{% load static %}
+<div class="container-fluid my-5 mx-2 " style="padding-bottom:80px">
+
+    <h3 class="col-md-3" style="margin-left:50px">Looking For Flatmates</h3>
+<ul id="horizontal-list">
+    {% for flatmate in allroommates %}
+    <li style="display:inline;" class="my-2">
+    <div class="card col-md-3 my-3 mx-4" style="width: 18rem;" >
+      <img src="/media/{{flatmate.prfilepicfile}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <small><p class="card-text"><b>{{flatmate.firstname}} {{ flatmate.lastname}}, </b>{{flatmate.gender}} Living In <b>{{flatmate.area}} Sqft </b>Apar. </p></small>
+              <small><p class="card-text"><b> Address: </b>{{flatmate.address}} {{flatmate.address2}} <b> {{flatmate.city}}</b> {{flatmate.statename}}<b> Pincode : {{flatmate.zipf}} MaxTanent :  </b>{{flatmate.maxtanent}}</p></small>
+              <small><p class="card-text"><b>Living : </b>{{flatmate.livingtanent}}</p></small>
+              <a href="properties/roommatedetail/{{flatmate.roommateprofileid}}" id="employee.propertyid" class="btn btn-primary my-2 ">Get Details</a>
+              <!--<a href="properties/payment/{{home.propertyid}}" class="btn btn-primary">Buy Now</a>-->
+      </div>
+    </div>
+    </li>
+    {% endfor %}
+    <ul>
+     
+</div>
+
+ {% endblock %}

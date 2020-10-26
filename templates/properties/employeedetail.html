@@ -1,0 +1,25 @@
+{% extends 'home/base.html' %}
+{% block title %}Employee Details{% endblock title %}
+{% block homeactive %} active {% endblock homeactive %}
+
+{% block body %}
+<div class="container my-4" style="padding-bottom:80px">
+    <div class="row">
+        <div class="col-md-4   ">
+        <p><h4 class="mx-0"> Employee Details</h4></p>
+        <img src="/media/{{employee.prfilepic}}" width="300px" height="300px" >  
+        </div>
+        <div class="col-md-8 my-5 mt-2  ">
+        <p><b class="mx-3">Name :</b>{{employee.firstname}} {{employee.middlename}} {{employee.lastname}}<b class="mx-5"> Address :</b>{{employee.address}} {{employee.address2}} <b class="mx-4">City :</b>{{employee.city}} </p>
+        <p><b class="mx-3">State :</b>{{employee.statename}}<b class="mx-4">Country :</b>{{employee.country}}<b class="mx-4">Pincode :</b>{{employee.zipf}}<b class="mx-4">Gender :</b>{{employee.gender}}  </p>
+        <p><b class="mx-3">Contact No  :</b>{{employee.phone}}<b class="mx-3">Date Of Birth  :</b>{{employee.dob}}</p>   
+        <p><b class="mx-3">Charges  :</b>{{employee.charges}}<b class="mx-3">Work Type  :</b>{{employee.worktype}}</p>
+        
+        </div>
+        <div class="col-md-12 my-5 mt-2  ">
+        <h4> Bio : </h4>
+        <p class="mx-3 text-justify"><b > </b>{{employee.bio}}</p>   
+        </div>
+    </div>
+</div>
+{% endblock %}
